@@ -24,7 +24,7 @@ class DatabaseHelper {
             );
           ''');
 
-           await db.execute('''
+          await db.execute('''
             CREATE TABLE perfil(
               idperfil INTEGER PRIMARY KEY,
               perfil TEXT NOT NULL
@@ -72,8 +72,8 @@ class DatabaseHelper {
           await db.execute('''
             CREATE TABLE movimentacao (
               idmovimentacao INTEGER PRIMARY KEY,
-              entrada TEXT NOT NULL,
-              saida TEXT NOT NULL,
+              entrada TEXT,
+              saida TEXT,
               idproduto INTEGER NOT NULL,
               idusuario INTEGER NOT NULL,
               FOREIGN KEY (idproduto) REFERENCES produto(idproduto),
