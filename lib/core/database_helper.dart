@@ -72,11 +72,12 @@ class DatabaseHelper {
           await db.execute('''
             CREATE TABLE movimentacao (
               idmovimentacao INTEGER PRIMARY KEY,
-              entrada TEXT,
-              saida TEXT,
-              idproduto INTEGER NOT NULL,
+              entrada integer,
+              saida integer,
+              data text not null,
+              idmaterial INTEGER NOT NULL,
               idusuario INTEGER NOT NULL,
-              FOREIGN KEY (idproduto) REFERENCES produto(idproduto),
+              FOREIGN KEY (idmaterial) REFERENCES produto(idmaterial),
               FOREIGN KEY (idusuario) REFERENCES usuario(idusuario)
             );
           ''');

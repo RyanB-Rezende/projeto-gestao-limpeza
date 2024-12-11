@@ -1,3 +1,4 @@
+import 'package:app_estoque_limpeza/presentation/pages/users/movimentacao_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_estoque_limpeza/data/model/produto_model.dart';
 import 'package:app_estoque_limpeza/data/repositories/produto_repositories.dart';
@@ -148,32 +149,13 @@ class HomePageAdminState extends State<HomePageAdmin> {
     );
   }
 
-  // Função para mostrar detalhes do produto
+  // Função para mostrar os detalhes do produto e navegar para a página de detalhes
   void _showProdutoDetails(ProdutoModel produto) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(produto.nome),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Código: ${produto.codigo}'),
-            Text('Quantidade: ${produto.quantidade}'),
-            Text('Data de Entrada: ${produto.entrada}'),
-            if (produto.validade != null) Text('Validade: ${produto.validade}'),
-            if (produto.local.isNotEmpty) Text('Local: ${produto.local}'),
-            Text('Tipo: ${produto.idtipo}'),
-          ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Fechar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProdutoDetalhesPage(
+            produto: produto), // Navega para a página de detalhes
       ),
     );
   }
