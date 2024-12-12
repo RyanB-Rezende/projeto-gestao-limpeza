@@ -1,9 +1,9 @@
 import 'package:app_estoque_limpeza/data/model/usuario_model.dart';
+import 'package:app_estoque_limpeza/presentation/pages/homepage_funcionario.dart';
 import 'package:app_estoque_limpeza/presentation/viewmodel/usuario_viewmodel.dart';
 import 'package:flutter/material.dart';
 import '../../../data/repositories/usuario_repositories.dart';
 import '../homepage_admin.dart';
-import '../homepage_comum.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -35,7 +35,7 @@ class LoginPageState extends State<LoginPage> {
         } else if (userProfile.idperfil == 2) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomepageComum()),
+            MaterialPageRoute(builder: (context) => const HomePageFuncionario()),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
