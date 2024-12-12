@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import 'package:app_estoque_limpeza/presentation/pages/homepage_admin.dart';
+=======
+import 'package:app_estoque_limpeza/presentation/pages/homepage_funcionario.dart';
+>>>>>>> dg
 import 'package:app_estoque_limpeza/presentation/pages/produto_page.dart';
 import 'package:app_estoque_limpeza/presentation/pages/users/movimentacao_page.dart';
 import 'package:app_estoque_limpeza/presentation/pages/usuarios_page.dart';
@@ -21,7 +25,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+<<<<<<< HEAD
       home: const HomePageAdmin(),
+=======
+      home: const HomePageFuncionario(),
+>>>>>>> dg
       routes: {
         '/cadastroProduto': (context) =>
             const ProdutosPage(), // Adicione a página de cadastro de produto
