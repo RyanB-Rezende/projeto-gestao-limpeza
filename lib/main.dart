@@ -1,6 +1,5 @@
 import 'package:app_estoque_limpeza/presentation/pages/produto_page.dart';
 import 'package:app_estoque_limpeza/presentation/pages/usuarios_page.dart';
-import 'package:app_estoque_limpeza/presentation/pages/users/login_page.dart';
 import 'package:flutter/material.dart';
 import 'presentation/pages/fornecedor_page.dart';
 
