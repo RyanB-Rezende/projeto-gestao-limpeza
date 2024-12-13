@@ -1,7 +1,8 @@
 import 'package:app_estoque_limpeza/data/model/movimentacao_model.dart';
 import 'package:flutter/material.dart';
 import 'package:app_estoque_limpeza/data/model/produto_model.dart';
-import 'package:app_estoque_limpeza/data/repositories/movimentacao_repositories.dart'; // Supondo que você tenha um repositório para movimentação.
+import 'package:app_estoque_limpeza/data/repositories/movimentacao_repositories.dart';
+import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart'; // Supondo que você tenha um repositório para movimentação.
 
 class ProdutoDetalhesPage extends StatefulWidget {
   final ProdutoModel produto;
@@ -48,7 +49,7 @@ class _ProdutoDetalhesPageState extends State<ProdutoDetalhesPage> {
     final movimentacao = Movimentacao(
       entrada: entrada.toString(),
       saida: saida.toString(),
-      idmaterial: widget.produto
+      idproduto: widget.produto
           .idMaterial!, // Supondo que o campo id no ProdutoModel seja id
       idusuario:
           1, // Aqui você deve pegar o ID do usuário logado (exemplo, 1 é fixo para teste)
@@ -81,67 +82,142 @@ class _ProdutoDetalhesPageState extends State<ProdutoDetalhesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detalhes do Produto: ${widget.produto.nome}'),
+  return Scaffold(
+    appBar: AppBar(
+      title: Text(
+        'Detalhes do Produto: ${widget.produto.nome}',
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Exibindo detalhes do produto
-              Text('Código: ${widget.produto.codigo}'),
-              Text('Quantidade: ${widget.produto.quantidade}'),
-              Text('Data de Entrada: ${widget.produto.entrada}'),
-              if (widget.produto.validade != null)
-                Text('Validade: ${widget.produto.validade}'),
-              if (widget.produto.local.isNotEmpty)
-                Text('Local: ${widget.produto.local}'),
-              Text('Tipo: ${widget.produto.idtipo}'),
-              const SizedBox(height: 20),
+      backgroundColor: Colors.blueAccent,
+    ),
+    body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Detalhes do produto em um Card estilizado
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Detalhes do Produto',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.blueGrey[800],
+                      ),
+                    ),
+                    const Divider(),
+                    Text('Código: ${widget.produto.codigo}'),
+                    Text('Quantidade: ${widget.produto.quantidade}'),
+                    Text('Data de Entrada: ${widget.produto.entrada}'),
+                    if (widget.produto.validade != null)
+                      Text('Validade: ${widget.produto.validade}'),
+                    if (widget.produto.local.isNotEmpty)
+                      Text('Local: ${widget.produto.local}'),
+                    Text('Tipo: ${widget.produto.idtipo}'),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
 
-              // Formulário para entrada e saída
-              const Text(
-                'Registrar Movimentação',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            // Formulário para registrar movimentação
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _entradaController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Quantidade de Entrada',
-                  border: OutlineInputBorder(),
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Registrar Movimentação',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                    const Divider(),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _entradaController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Quantidade de Entrada',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor: Colors.blue[50],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _saidaController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Quantidade de Saída',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor: Colors.blue[50],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _dataController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        MaskedInputFormatter('##/##/####'), // Define o formato da máscara
+                      ],
+                      decoration: InputDecoration(
+                        labelText: 'Data (DD/MM/YYYY)',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor: Colors.blue[50],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: _registrarMovimentacao,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                        ),
+                        child: const Text(
+                          'Registrar Movimentação',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _saidaController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Quantidade de Saída',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _dataController,
-                decoration: const InputDecoration(
-                  labelText: 'Data (dd/MM/yyyy)',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _registrarMovimentacao,
-                child: const Text('Registrar Movimentação'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

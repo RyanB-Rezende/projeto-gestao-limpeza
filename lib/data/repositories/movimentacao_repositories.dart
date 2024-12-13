@@ -21,7 +21,7 @@ class MovimentacaoRepository {
         idmovimentacao: map['idmovimentacao'] as int?,
         entrada: map['entrada'] as String,
         saida: map['saida'] as String,
-        idmaterial: map['idmaterial'] as int,
+        idproduto: map['idmaterial'] as int,
         idusuario: map['idusuario'] as int,
       );
     }).toList();

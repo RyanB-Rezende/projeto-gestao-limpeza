@@ -2,14 +2,14 @@ class Movimentacao {
   final int? idmovimentacao;
   final String entrada;
   final String saida;
-  final int idmaterial;
+  final int idproduto;
   final int idusuario;
 
   Movimentacao({
     this.idmovimentacao,
     required this.entrada,
     required this.saida,
-    required this.idmaterial,
+    required this.idproduto,
     required this.idusuario,
   });
 
@@ -18,7 +18,7 @@ class Movimentacao {
       'idmovimentacao': idmovimentacao,
       'entrada': entrada,
       'saida': saida,
-      'idmaterial': idmaterial,
+      'idmaterial': idproduto,
       'idusuario': idusuario,
     };
   }

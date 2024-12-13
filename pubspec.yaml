@@ -40,6 +40,7 @@ dependencies:
   sqflite_common_ffi: ^2.3.4+3
   path: ^1.9.0
   crypto: ^3.0.6
+  flutter_multi_formatter: ^2.5.1
 
 dev_dependencies:
   flutter_test:

@@ -65,7 +65,7 @@ class LoginPageState extends State<LoginPage> {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal,
+                  color: Colors.blue,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -93,7 +93,7 @@ class LoginPageState extends State<LoginPage> {
                 onPressed: loginUser,
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Colors.teal,
+                  backgroundColor: Colors.blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -122,16 +122,16 @@ class LoginPageState extends State<LoginPage> {
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: Colors.teal),
+        prefixIcon: Icon(icon, color: Colors.blue),
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.teal),
+        labelStyle: const TextStyle(color: Colors.blue),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Colors.teal),
+          borderSide: const BorderSide(color: Colors.blue),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Colors.teal, width: 2),
+          borderSide: const BorderSide(color: Colors.blue),
         ),
         filled: true,
         fillColor: Colors.white,

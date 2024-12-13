@@ -149,7 +149,8 @@ class ProdutosState extends State<ProdutosPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro de Produtos'),
+        title: const Text('Cadastro de Produtos',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         backgroundColor: Colors.blue,
       ),
       body: Padding(
